@@ -83,7 +83,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             file_path = UPLOAD_FOLDER + "/" + filename
-            nx = pd.read_excel('Data.xlsx')
+            nx = pd.read_excel(file_path)
             lf = pd.DataFrame(nx)
 
             table_names = []
@@ -110,56 +110,12 @@ def upload_file():
                     
                 txt += "</div>"
             txt += "</table>"    
-                     
+            print table_names
             
             return "upload any Excelsheet and ExcellPress will convert it for you to html flexbox template, soon you can controll the excelsheet layout and edit it "  + "<br><br>" + txt 
             ## .shape get the len of row first and second number column
             ## it our case not big deal cus our files will be all same number column and rows
-            
-            print("")
-            array = []
-            print(df.shape[0])
-            for i in range(df.shape[0]):
-                help0 = i
-                
-                for n in range(df.shape[0]):
-                    help1 = n
-                    print(i)
-                    print(n)
-                    if n > 1:
-                        continue
-                    print(df.iloc[help0][help1])
-                    array.append(df.iloc[help0][help1])
-             
-            page = "<style>#request{font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;border-collapse: collapse;width:100%;}"
-            page += "#request td, #request th {border: 1px solid #ddd;padding: 8px;}"
-            page += "#request tr:nth-child(even){background-color: #f2f2f2;}"
-            page += "#request tr:hover {background-color: #ddd;}"
-            page += "#request th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;}"
-            page +="</style>"
-            page += "<table id='request'><tr><th>Name</th><th>P Number</th></tr>"
-            
-            print(len(array))
-            ## here we change 2 by the cells number we already must know how many cells
-            ## in the request or how many fileds don't forget always divide by the cells number 
 
-            cells_index = 0
-            got_it = False
-            ages = []
-            for onetd in range(len(array)):
-                help2 = onetd
-                
-                if onetd % 2 == 1:
-                    ages.append(array[onetd])
-                    page += "<td>" + str(array[onetd]) + "</td>"
-
-                else:
-                    page += "</tr><tr>" + "<td>" + str(array[onetd]) +  "</td>"                 
-
-            return page
-
-            
-                                    
     return render_template('index.html')
 
 
