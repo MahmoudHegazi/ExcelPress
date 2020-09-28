@@ -95,20 +95,24 @@ def upload_file():
             df = pd.DataFrame(nx, columns= table_names)
 
             min_length = len(df[table_names])
-            txt = "<table>"
+            txt = "<style>body{height:100%;}.parent {display: flex;flex-flow: row nowrap;height: 250px;background-color:rgb(240 230 230);height:100%;align-content:center;align-items:flex-top;text-align:center;padding:10px;} .child {width: 40%;height: 40%;} .txt{ background-color: white;border:1px solid gold;padding:3px;margin:2px;} .headers {background-color: black;color:white; }</style>"
+            txt += "<div class='parent'>"
             #print len(df[table_names])
             for i in table_names:
-                txt += "<div style='display"           
+                txt += "<div class='child'>"
+                txt += "<div class='txt headers'>" + str(i) + "</div>"
                 for xxx in range(min_length):    
                     print(df[i][xxx])
-                    txt += "<td>"
+                    txt += "<div class='txt'>"
                     txt += str(df[i][xxx])
-                    txt += "</td>"
-                txt += "</tr>"
+                    txt += "</div>"
+                    txt += "</br>"
+                    
+                txt += "</div>"
             txt += "</table>"    
                      
-             
-            return "Hi Robot"  + "<br><br>" + txt 
+            
+            return "upload any Excelsheet and ExcellPress will convert it for you to html flexbox template, soon you can controll the excelsheet layout and edit it "  + "<br><br>" + txt 
             ## .shape get the len of row first and second number column
             ## it our case not big deal cus our files will be all same number column and rows
             
